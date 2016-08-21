@@ -1,7 +1,7 @@
 ArduinoRGBLighting
 ==================
 
-Arduino powered RGB lighting controller with HTTP POST API, self hosted web control panel and Android application.
+Arduino powered RGB lighting controller with HTTP POST API, self hosted web control panel.
 
 Requirements
 ------------
