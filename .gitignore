@@ -1,4 +1,6 @@
 # Eclipse stuff
+core/
+libraries/
 .metadata
 .settings
 .settings/language.settings.xml
