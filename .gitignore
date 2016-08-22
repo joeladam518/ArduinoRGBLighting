@@ -1,6 +1,9 @@
 # Eclipse stuff
 .metadata
 .settings
+.settings/language.settings.xml
+.cproject
+.project
 
 # Android stuff
 bin/
@@ -10,3 +13,4 @@ RGBLightingAudio/data
 
 # Temp. files
 *~
+*.prefs
