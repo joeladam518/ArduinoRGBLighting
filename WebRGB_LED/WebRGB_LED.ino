@@ -355,7 +355,6 @@ int calculateVal(int step, int val, int i) {
 }
 
 void crossFade(int color[3], int wait) {
-
   //Variables to check incoming connection
   char buff[64];
   int len = 64;
