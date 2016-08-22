@@ -8,7 +8,7 @@ Requirements
 
 -	[Webduino](https://github.com/sirleech/Webduino) which is used to provide a better HTTP server on the Arduino
 -	[jQuery](http://jquery.com/) is used for the web control page, however all that is requiered is a connection to the internet on the client as the JS is pulled from the jQuery site
--	An Arduino that has more than 33kb flash memory and can a Arduino Ethernet sheild. Cannot use a Arduino Uno as the .ino file rounds out to about 33kb. Needs an Mega, 101, etc... 
+-	An Arduino that has more than 33kb flash memory and a Arduino Ethernet sheild. Cannot use a Arduino Uno as the .ino file rounds out to about 33kb. Needs an Mega, 101, etc... 
 -	There is possibly more, I will update the list as I find them.
 
 Installation/Setup
