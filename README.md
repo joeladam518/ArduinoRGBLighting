@@ -45,8 +45,9 @@ The controller will respond with an XML formatted response giving details of the
 <g>255</g>
 <b>140</b>
 </currentColour>
-<mode>1</mode>
 <lastTime>500</lastTime>
+<pwr>1</pwr>
+<rnbw>0</rnbw>
 <lastTransition>1</lastTransition>
 <exec>FALSE</exec>
 </xml>

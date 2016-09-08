@@ -49,11 +49,11 @@ int lastRnbwVal = 0;
 int colorWheelBreakVal = -1;
 
 // Color arrays
-int red[3]  = { 100, 0, 0 };
-int green[3]  = { 0, 100, 0 };
-int blue[3]    = { 0, 0, 100 };
-int cyan[3]  = { 0, 100, 100 };
-int magenta[3]   = { 100, 0, 100 };
+int red[3] = { 100, 0, 0 };
+int green[3] = { 0, 100, 0 };
+int blue[3] = { 0, 0, 100 };
+int cyan[3] = { 0, 100, 100 };
+int magenta[3] = { 100, 0, 100 };
 int yellow[3] = { 100, 100, 0 };
 
 // SD Card variable
@@ -158,7 +158,7 @@ void webBackend(WebServer &server, WebServer::ConnectionType type, char *, bool)
 
     server.println("</xml>");
   }
-}
+}// End of webBackend service
 
 //Switches power off and on to the LED Lights
 void switchBackend(WebServer &server, WebServer::ConnectionType type, char *, bool) {
@@ -240,9 +240,9 @@ void switchBackend(WebServer &server, WebServer::ConnectionType type, char *, bo
 
     server.println("</xml>");
   }
-}
+}// End of switchBackend service
 
-//Provides back end to control lights from front end and other apps
+// Color wheel backend
 void rnbwBackend(WebServer &server, WebServer::ConnectionType type, char *, bool) {
   char name[16];
   char value[16];
@@ -324,7 +324,7 @@ void rnbwBackend(WebServer &server, WebServer::ConnectionType type, char *, bool
 
     server.println("</xml>");
   }
-}// End of rnbwBackend command
+}// End of rnbwBackend service
 
 // **Start of rnbwBackend() Methods**
 int calculateStep(int prevValue, int endValue) {
@@ -383,7 +383,7 @@ void crossFade(int color[3], int wait) {
   currentColour[R] = colorVal[R];
   currentColour[G] = colorVal[G];
   currentColour[B] = colorVal[B];
-  delay(5); // Pause for optional 'wait' milliseconds before resuming the loop
+  delay(2); // Pause for optional 'wait' milliseconds before resuming the loop
 }
 
 // **End of rnbwBackend() Methods/Functions**
