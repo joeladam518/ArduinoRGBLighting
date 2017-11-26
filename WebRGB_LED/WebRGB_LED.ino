@@ -10,10 +10,10 @@
 #include <SD.h>
 
 // Pins
-static const int RED_PIN = 44;
-static const int GREEN_PIN = 45;
-static const int BLUE_PIN = 46;
-static const int PWR_PIN = 22;
+static const int RED_PIN   = 24;
+static const int GREEN_PIN = 25;
+static const int BLUE_PIN  = 26;
+static const int PWR_PIN   = 27;
 
 // Color Component Enum
 static const int R = 0;
@@ -65,13 +65,13 @@ static uint8_t IP[] = {192, 168, 1, 50};
 WebServer webserver("", 80);
 
 // HTML for web front end UI
-P(failedToReadrgbindx) = "<h1>Web file Boo!!!</h1>";
+P(failedToReadrgbindx) = "<h1>Web File Boo!!!</h1>";
 
 // Serves web front end to control light from a web browser
 void webUI(WebServer &server, WebServer::ConnectionType type, char *, bool) 
 {
     server.httpSuccess();
-    lastRnbwVal == 0; // make Rainbow Loop stop
+    lastRnbwVal = 0; // make Rainbow Loop stop
 
     if (type == WebServer::GET) {
         // Open web page file
@@ -92,10 +92,10 @@ void webUI(WebServer &server, WebServer::ConnectionType type, char *, bool)
 // Provides back end to control lights from front end and other apps
 void webBackend(WebServer &server, WebServer::ConnectionType type, char *, bool) 
 {
+    server.httpSuccess();
     char name[16];
     char value[16];
-    server.httpSuccess();
-    lastRnbwVal == 0; // make Rainbow Loop stop
+    lastRnbwVal = 0; // make Rainbow Loop stop
 
     if (type == WebServer::POST) {
         int color[3];
@@ -110,7 +110,7 @@ void webBackend(WebServer &server, WebServer::ConnectionType type, char *, bool)
             if (strcmp(name, "r") == 0) { color[R] = atoi(value); }
             if (strcmp(name, "g") == 0) { color[G] = atoi(value); }
             if (strcmp(name, "b") == 0) { color[B] = atoi(value); }
-            if (strcmp(name, "trans") == 0) { transition = atoi(value); }
+            if (strcmp(name, "trans") == 0) { ttransition = atoi(value); }
             if (strcmp(name, "time") == 0) { ttime = atoi(value); }
         }
 
@@ -172,7 +172,7 @@ void switchBackend(WebServer &server, WebServer::ConnectionType type, char *, bo
     char name[16];
     char value[16];
     server.httpSuccess();
-    lastRnbwVal == 0; // make Rainbow Loop stop
+    lastRnbwVal = 0; // make Rainbow Loop stop
 
     if (type == WebServer::POST) {
         while (server.readPOSTparam(name, 16, value, 16)) {
@@ -248,10 +248,10 @@ void switchBackend(WebServer &server, WebServer::ConnectionType type, char *, bo
 // Color wheel back end
 void rnbwBackend(WebServer &server, WebServer::ConnectionType type, char *, bool) 
 {
-    char name[16];
-    char value[16];
     server.httpSuccess();
     
+    char name[16];
+    char value[16];
     int cwtime = 5; // Default Time...
 
     if (type == WebServer::POST) {
@@ -394,7 +394,7 @@ void crossFade(int color[3], int wait)
     currentcolor[R] = colorVal[R];
     currentcolor[G] = colorVal[G];
     currentcolor[B] = colorVal[B];
-    delay(2);
+    delay(1);
 } 
 
 // **End of rnbwBackend() Methods/Functions**
@@ -452,8 +452,7 @@ void setRGB(int color[3])
     analogWrite(BLUE_PIN, color[B]);
 
     currentcolor[R] = color[R];
-    currentcolor[G] = color[G];
-    currentcolor[B] = color[B];
+     currentcolor[B] = color[B];
 }
 
 // **End of Main Methods/Functions**

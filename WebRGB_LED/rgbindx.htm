@@ -1,359 +1,271 @@
 <!doctype html>
 <html lang='en'>
 <head>
-	<meta charset='utf-8'>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>RGB Lights</title>
-	<!--[if lt IE 9]>
-		<script src='http://html5shiv.googlecode.com/svn/trunk/html5.js'></script>
-	<![endif]-->
-	<link rel='stylesheet' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css'>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>RGB Lights</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <style type='text/css'>
-		html {
-			width: 100%;
-			padding: 0;
-			margin: 0;
-		}
-		body {
-			font-size: 16px;
-			font-size: 100%;
-			font-size: 1em;
-			width: 100%;
-			padding: 0;
-			margin: 15px auto;
-		}
-        div.const-width {
-            font-family: Arial, Helvetica, sans-serif;
-            width: 400px;
-			padding: 0;
-			margin: 5px auto;
+        body {
+            font-size: 16px;
         }
-        #header {
-			width: 98%;
-			max-width: 550px;
+        header {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            width: 100%;
             text-align: center;
-            border: 1px solid blue;
-			padding: 0;
-			margin: 10px auto;
         }
-        p.tight {
-			padding: 0;
-			margin: 0;
+        .section {
+            margin: 0 auto 50px auto;
         }
-        h1 {
-			padding: 0;
-			margin: 0;
+        .section:not(.section_not) {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
         }
-		#colour-sliders {
-			width: 89%;
-			max-width: 500px;
-			padding: 0;
-			margin: 35px auto 35px auto;
-		}
-		.slider {
-			width: 100%;
-			padding: 0;
-			margin: 20px auto;
+        .section.function-buttons .col,
+        .section.transition-time .col {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 50px auto;
         }
-		#transition-selector {
-			text-align: center;
-			width: 99%;
-			padding: 0;
-			margin: 15px auto;
-		}
-		#transition-selector label {
-			height: 50px;
-			width: 150px;
-		}
-		#transition-select {
-			text-align: center;
-			font-size: 1.2em;
-			height: 75px;
-            width: 150px;
+        .section.transition-time {
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
         }
-        #time-spinner {
-			text-align: center;
-			font-size: 1.2em;
-			height: 20px;
-            width: 100px;
-			padding:0;
-			margin:0;
+        .btn-primary {
+            min-width: 125px;
+            color: #333;
+            background-color: #fff;
+            border-color: #999;
         }
-		#timeType-select{
-			text-align: center;
-			font-size: 1.2em;
-			padding:0;
-			margin:0;
-		}
-		#time-div {
-			width: 350px;
-			text-align: center;
-			padding: 0;
-			margin: 25px auto;
-		}
-		#time-div .t-divs {
-			display: inline-block;
-		}
-		.t-divs label {
-			display: block;
-		}
-		#time-set-btn {
-			width: 100px;
-			margin: 0 10px;
-		}
-		#time-spinner {
-			height: 72px;
-			width: 100px;
-		}
-		.rainbow-wrapper button{
-			display: block;
-			margin: 15px auto;
-		}
-		.rButton {
-			height: 75px;
-			width: 250px;
-			padding: 0;
-			margin: 7px 0;
-		}
-		#function-buttons {
-            width: 350px;
-            padding: 0;
-            margin: 30px auto;
+        input[type=range] {
+          -webkit-appearance: none;
+          width: 100%;
+          margin: 0 0 25px 0;
         }
-        #function-buttons div {
-            width: 99%;
+        input[type=range]:focus {
+          outline: none;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+          width: 100%;
+          height: 10px;
+          cursor: pointer;
+          box-shadow: 0.75px 0.75px 1px rgba(0, 0, 0, 0.26), 0px 0px 0.75px rgba(13, 13, 13, 0.26);
+          background: #ffffff;
+          border-radius: 5px;
+          border: 1px solid #000000;
+        }
+        input[type=range]::-webkit-slider-thumb {
+          box-shadow: 0.75px 0.75px 1.5px rgba(50, 50, 50, 0.75), 0px 0px 0.75px rgba(63, 63, 63, 0.75);
+          border: 1px solid rgba(50, 50, 50, 0.75);
+          height: 30px;
+          width: 15px;
+          border-radius: 5px;
+          background: #ffffff;
+          cursor: pointer;
+          -webkit-appearance: none;
+          margin-top: -11px;
+        }
+        input[type=range]:focus::-webkit-slider-runnable-track {
+          background: #ffffff;
+        }
+        input[type=range]::-moz-range-track {
+          width: 100%;
+          height: 10px;
+          cursor: pointer;
+          box-shadow: 0.75px 0.75px 1px rgba(0, 0, 0, 0.26), 0px 0px 0.75px rgba(13, 13, 13, 0.26);
+          background: #ffffff;
+          border-radius: 5px;
+          border: 1px solid #000000;
+        }
+        input[type=range]::-moz-range-thumb {
+          box-shadow: 0.75px 0.75px 1.5px rgba(50, 50, 50, 0.75), 0px 0px 0.75px rgba(63, 63, 63, 0.75);
+          border: 1px solid rgba(50, 50, 50, 0.75);
+          height: 30px;
+          width: 15px;
+          border-radius: 5px;
+          background: #ffffff;
+          cursor: pointer;
+        }
+        input[type=range]::-ms-track {
+          width: 100%;
+          height: 10px;
+          cursor: pointer;
+          background: transparent;
+          border-color: transparent;
+          color: transparent;
+        }
+        input[type=range]::-ms-fill-lower {
+          background: #808080;
+          border: 1px solid #000000;
+          border-radius: 10px;
+          box-shadow: 0.75px 0.75px 1px rgba(0, 0, 0, 0.26), 0px 0px 0.75px rgba(13, 13, 13, 0.26);
+        }
+        input[type=range]::-ms-fill-upper {
+          background: #ffffff;
+          border: 1px solid #000000;
+          border-radius: 10px;
+          box-shadow: 0.75px 0.75px 1px rgba(0, 0, 0, 0.26), 0px 0px 0.75px rgba(13, 13, 13, 0.26);
+        }
+        input[type=range]::-ms-thumb {
+          box-shadow: 0.75px 0.75px 1.5px rgba(50, 50, 50, 0.75), 0px 0px 0.75px rgba(63, 63, 63, 0.75);
+          border: 1px solid rgba(50, 50, 50, 0.75);
+          height: 30px;
+          width: 15px;
+          border-radius: 5px;
+          background: #ffffff;
+          cursor: pointer;
+          height: 10px;
+        }
+        input[type=range]:focus::-ms-fill-lower {
+          background: #ffffff;
+        }
+        input[type=range]:focus::-ms-fill-upper {
+          background: #ffffff;
+        }
+
+        #red-slider::-webkit-slider-runnable-track {
+            background: red;
+        }
+        #red-slider::-moz-range-track {
+            background: red;
+        }
+        #red-slider::-ms-fill-upper {
+            background: red;
+        }
+        #green-slider::-webkit-slider-runnable-track {
+            background: green;
+        }
+        #green-slider::-moz-range-track {
+            background: green;
+        }
+        #green-slider::-ms-fill-upper {
+            background: green;
+        }
+        #blue-slider::-webkit-slider-runnable-track {
+            background: blue;
+        }
+        #blue-slider::-moz-range-track {
+            background: blue;
+        }
+        #blue-slider::-ms-fill-upper {
+            background: blue;
+        }
+        .ON {
+            -moz-box-shadow: 0 0 10px 2px #FFFF00;
+            -webkit-box-shadow: 0 0 10px 2px #FFFF00;
+            box-shadow: 0 0 10px 2px #FFFF00;
+        }
+        .OFF {
+            -moz-box-shadow: 0 0 10px 2px #000000;
+            -webkit-box-shadow: 0 0 10px 2px #000000;
+            box-shadow: 0 0 10px 2px #000000;
+        }
+        footer {
             text-align: center;
-            padding: 0;
             margin: 15px auto;
         }
-		.btn {
-			font-size: 1em;
-            height: 75px;
-            width: 32%;
-			padding: 0;
-			margin: 0;
-        }
-		.frameWrapper {
-			width: 342px;
-			padding: 0;
-			margin: 0 auto;
-		}
-		iframe {
-			height: 475px;
-			width: 340px;
-			padding: 0;
-			margin: 0 auto;
-		}
-		input[type=range]::-webkit-slider-thumb {
-			-webkit-appearance: none;
-			border: 1px solid #000000;
-			height: 20px;
-			width: 20px;
-			border-radius: 10px;
-			background: #ffffff;
-			cursor: pointer;
-			margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-			box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
-		}
-		/* All the same stuff for Firefox */
-		input[type=range]::-moz-range-thumb {
-			box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-			border: 1px solid #000000;
-			height: 20px;
-			width: 20px;
-			border-radius: 10px;
-			background: #ffffff;
-			cursor: pointer;
-		}
-		/* All the same stuff for IE */
-		input[type=range]::-ms-thumb {
-			box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-			border: 1px solid #000000;
-			height: 20px;
-			width: 20px;
-			border-radius: 10px;
-			background: #ffffff;
-			cursor: pointer;
-		}
-		/* Track */
-		input[type=range]::-webkit-slider-runnable-track {
-			height: 10px;
-			cursor: pointer;
-			background: #999999;
-			border-radius: 1.3px;
-		}
-		input[type=range]:focus::-webkit-slider-runnable-track {
-			background: #367ebd;
-		}
-		input[type=range]::-moz-range-track {
-			height: 10px;
-			cursor: pointer;
-			background: #999999;
-			border-radius: 5px;
-			border: 0.2px solid #010101;
-		}
-		input[type=range]::-ms-track {
-			height: 10px;
-			cursor: pointer;
-			background: transparent;
-			border-color: transparent;
-			border-width: 16px 0;
-			color: transparent;
-		}
-		input[type=range]::-ms-fill-lower {
-			background: #2a6495;
-			border: 0.2px solid #010101;
-			border-radius: 5px;
-		}
-		input[type=range]:focus::-ms-fill-lower {
-			background: #999999;
-		}
-		input[type=range]::-ms-fill-upper {
-			background: #999999;
-			border: 0.2px solid #010101;
-			border-radius: 5px;
-		}
-		input[type=range]:focus::-ms-fill-upper {
-			background: #367ebd;
-		}
-		#red-slider::-webkit-slider-runnable-track {
-			background: red;
-		}
-		#red-slider::-moz-range-track {
-			background: red;
-		}
-		#red-slider::-ms-fill-upper {
-			background: red;
-		}
-		#green-slider::-webkit-slider-runnable-track {
-			background: green;
-		}
-		#green-slider::-moz-range-track {
-			background: green;
-		}
-		#green-slider::-ms-fill-upper {
-			background: green;
-		}
-		#blue-slider::-webkit-slider-runnable-track {
-			background: blue;
-		}
-		#blue-slider::-moz-range-track {
-			background: blue;
-		}
-		#blue-slider::-ms-fill-upper {
-			background: blue;
-		}
-		.ON {
-			-moz-box-shadow: 0 0 10px 2px #FFFF00;
-			-webkit-box-shadow: 0 0 10px 2px #FFFF00;
-			box-shadow: 0 0 10px 2px #FFFF00;
-		}
-		.OFF {
-			-moz-box-shadow: 0 0 10px 2px #000000;
-			-webkit-box-shadow: 0 0 10px 2px #000000;
-			box-shadow: 0 0 10px 2px #000000;
-		}
-		footer {
-			text-align: center;
-			margin: 15px auto;
-		}
     </style>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 </head>
 <body>
-    <header class='const-width' id='header'>
-        <h1>RGB LED Lighting</h1>
-    </header>
-    <div class='const-width' id='colour-sliders'>
-        <input type='range' class='slider' id='red-slider' min='0' max='255' step='1' value='0'>
-		<input type='range' class='slider' id='green-slider' min='0' max='255' step='1' value='0'>
-		<input type='range' class='slider' id='blue-slider' min='0' max='255' step='1' value='0'>
+    <div class="container">
+        <header class="row">
+            <h1>RGB LED Lighting</h1>
+        </header>
+        
+        <div class="section section_not">
+            <input type="range" class="slider" id="red-slider" min="0" max="255" step="1" value="0">
+            <input type="range" class="slider" id="green-slider" min="0" max="255" step="1" value="0">
+            <input type="range" class="slider" id="blue-slider" min="0" max="255" step="1" value="0">
+        </div>
+        
+        <div class="section">
+            <label>Transition Type:</label>
+            <select id="transition-select">
+                <option value="1">Instant</option>
+                <option value="2">Fade</option>
+            </select>
+        </div>
+        
+        <div class="section section_not function-buttons">
+            <div class="col col-md-12">
+                <button class="btn btn-primary btn-lg" id="full-on-button">Full On</button>
+                <button class="btn btn-primary btn-lg" id="white-button">White</button>
+                <button class="btn btn-primary btn-lg" id="pwr-on-button">Power On</button>
+            </div>
+            <div class="col col-md-12">
+                <button class="btn btn-primary btn-lg" id="full-off-button">Full Off</button>
+                <button class="btn btn-primary btn-lg" id="refresh-button">Refresh</button>
+                <button class="btn btn-primary btn-lg" id="pwr-off-button">Power Off</button>
+            </div>      
+        </div>
+        
+        <div class="section transition-time">
+            <label for="time-spinner">Transition Time:</label>
+            <div class="col col-md-12">
+                <input id="time-spinner" type="number" min="0" max="1000" step="5" value="0">
+                <button class="btn btn-primary" id="time-set-btn">Set Time</button>
+            </div>
+        </div>
+        
+        <div class="section">
+            <button class="btn btn-primary" id="rainbow-button-on">Color Wheel ON</button>
+            <button class="btn btn-primary" id="rainbow-button-off">Color Wheel OFF</button>
+        </div>
+        
+        <footer>
+            Copyright &copy; 2017 Joel Haker
+        </footer>
     </div>
-	<div class='const-width' id='transition-selector'>
-        <label>Transition Type:</label>
-        <select id='transition-select'>
-            <option value='1'>No Transition</option>
-            <option value='2'>Fade</option>
-        </select>
-    </div>
-	<div class='const-width' id='function-buttons'>
-        <div>
-			<button class='btn' id='full-on-button'>Full On</button>
-            <button class='btn' id='white-button'>White</button>
-			<button class='btn' id='pwr-on-button'>Power On</button>
-		</div>
-        <div>
-            <button class='btn' id='full-off-button'>Full Off</button>
-			<button class='btn' id='refresh-button'>Refresh</button>
-			<button class='btn' id='pwr-off-button'>Power Off</button>
-		</div>		
-    </div>
-	<div class='const-width' id='time-div'>
-		<!--
-		<div id='ttdiv' class='t-divs' style=" display: none; /**** NO FUNCTIONALITY YET ****/">
-			<label for='timeType-select' style=" display: none; /**** NO FUNCTIONALITY YET ****/">Time Measurement:</label>
-			<div>
-				<select id='timeType-select' name='timeType-select' style=" display: none; /**** NO FUNCTIONALITY YET ****/">
-					<option value='0'>Seconds</option>
-					<option value='1'>Minutes</option>
-					<option value='2'>Hours</option>
-				</select>				
-			</div>
-		</div>
-		-->
-		<div class='t-divs' id='time-selector'>
-			<label for='ttime'>Transition Time:</label>
-			<input type='number' min='0' max='1000' step='5' value='0' id='time-spinner' name='ttime'>
-			<button class='btn' id='time-set-btn'>Set Time</button>
-		</div>
-	</div>
-	<div class='rainbow-wrapper'>
-		<button class='rButton' id='rainbow-button-on'>Color Wheel ON</button>
-		<button class='rButton' id='rainbow-button-off'>Color Wheel OFF</button>
-	</div>
-	<footer>
-		Copyright &copy; 2016 Joel Haker
-	</footer>
-	<script type='text/javascript'>
-		//ip address of arduino
-		var ipaddr = 'http://192.168.1.50';
-		
-		// functions
-		function masterHandler(r, g, b) {
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script type='text/javascript'>
+        const arduino_ip_address = 'http://192.168.1.50';
+        
+        const masterHandler = function _masterHandler(r, g, b) {
             $('#red-slider').val(r);
             $('#green-slider').val(g);
             $('#blue-slider').val(b);
             updateHandler();
         }
-		function setColorWheel(rbcwval) {
-			var rbwtime = $('#time-spinner').spinner('value');
-			var rbwTimeType = $('#timeType-select').val();
-			
-            $.post((ipaddr + '/clrWheel'), {rnbw: rbcwval, rtimetype: rbwTimeType, rtime: rbwtime})
+        const setColorWheel = function _setColorWheel(rbcwval) {
+            var rbwtime = $('#time-spinner').spinner('value');
+            var rbwTimeType = $('#timeType-select').val();
+            
+            $.post((arduino_ip_address + '/clrWheel'), {rnbw: rbcwval, rtimetype: rbwTimeType, rtime: rbwtime})
             .done(function(data) {
                 handleXMLresponse(data);
             });
         }
-        function setPwr(swtch) {
-            $.post((ipaddr + '/switch'), {pwr: swtch})
+        const setPwr = function _setPwr(swtch) {
+            $.post((arduino_ip_address + '/switch'), {pwr: swtch})
             .done(function(data) {
                 handleXMLresponse(data);
             });
         }
-        function setLights(red, green, blue, transition, ttime) {
-            $.post((ipaddr + '/service'), {r: red, g: green, b: blue, trans: transition, time: ttime})
+        const setLights = function _setLights(red, green, blue, transition, ttime) {
+            $.post((arduino_ip_address + '/service'), {r: red, g: green, b: blue, trans: transition, time: ttime})
             .done(function(data) {
                 handleXMLresponse(data);
             });
         }
-        function getLightState() {
-            $.get((ipaddr + '/service'))
+        const getLightState = function _getLightState() {
+            $.get((arduino_ip_address + '/service'))
             .done(function(data) {
                 handleXMLresponse(data);
             });
         }
-        function handleXMLresponse(data) {
+        const handleXMLresponse = function _handleXMLresponse(data) {
             var parser = new DOMParser();
             var doc = parser.parseFromString(data, 'text/xml');
             xmlDoc = $.parseXML(data);
@@ -363,34 +275,34 @@
             var blue = $xml.find('b').text();
             var transition = $xml.find('exec').text();
             var time = $xml.find('lastTime').text();
-			var pwr = $xml.find('pwr').text();
-			var rnBwClrWhl = $xml.find('rnbw').text();
+            var pwr = $xml.find('pwr').text();
+            var rnBwClrWhl = $xml.find('rnbw').text();
             $('#red-slider').val(red);
             $('#green-slider').val(green);
             $('#blue-slider').val(blue);
             $('#time-spinner').val(time);
-			if(transition == '2') { $('#transition-select').val('2'); }
-			else { $('#transition-select').val('1'); }
+            if(transition == '2') { $('#transition-select').val('2'); }
+            else { $('#transition-select').val('1'); }
             
-			if (pwr == '1') {
-				$('#pwr-off-button').removeClass('OFF');
-				$('#pwr-on-button').addClass('ON');
-			}
-			else if (pwr == '0') {
-				$('#pwr-on-button').removeClass('ON');
-				$('#pwr-off-button').addClass('OFF');
-			}
-			
-			if (rnBwClrWhl == '1') {
-				$('#rainbow-button-off').removeClass('OFF');
-				$('#rainbow-button-on').addClass('ON');
-			}
-			else if (rnBwClrWhl == '0') {
-				$('#rainbow-button-on').removeClass('ON');
-				$('#rainbow-button-off').addClass('OFF');
-			}
+            if (pwr == '1') {
+                $('#pwr-off-button').removeClass('OFF');
+                $('#pwr-on-button').addClass('ON');
+            }
+            else if (pwr == '0') {
+                $('#pwr-on-button').removeClass('ON');
+                $('#pwr-off-button').addClass('OFF');
+            }
+            
+            if (rnBwClrWhl == '1') {
+                $('#rainbow-button-off').removeClass('OFF');
+                $('#rainbow-button-on').addClass('ON');
+            }
+            else if (rnBwClrWhl == '0') {
+                $('#rainbow-button-on').removeClass('ON');
+                $('#rainbow-button-off').addClass('OFF');
+            }
         }
-        function updateHandler() {
+        const updateHandler = function _updateHandler() {
             var red = $('#red-slider').val();
             var green = $('#green-slider').val();
             var blue = $('#blue-slider').val();
@@ -398,17 +310,16 @@
             var transition = $('#transition-select').val();
             setLights(red, green, blue, transition, time);
         }
-		
-		// onLoad / init()
-		$(function() {
+        
+        $(function() {
             var tSpinnerOptions = {min: 0, max: 1000, stop: 1};
-			$('#red-slider').on('change', updateHandler);
-			$('#green-slider').on('change', updateHandler);
-			$('#blue-slider').on('change', updateHandler);
-			$('#transition-select').on('change', updateHandler);
-			$('#time-spinner').spinner();
-			$('#time-set-btn')
-                .button()
+            $('#red-slider').on('change', updateHandler);
+            $('#green-slider').on('change', updateHandler);
+            $('#blue-slider').on('change', updateHandler);
+            $('#transition-select').on('change', updateHandler);
+            $('#time-spinner').spinner();
+            $('#time-set-btn')
+                //.button()
                 .click(function() {
                     updateHandler();
                 });
@@ -418,44 +329,44 @@
                     getLightState();
                 });
             $('#full-on-button')
-                .button()
+                //.button()
                 .click(function() {
                     masterHandler(255, 255, 255);
                 });
             $('#full-off-button')
-                .button()
+                //.button()
                 .click(function() {
                     masterHandler(0, 0, 0);
                 });
             $('#white-button')
-                .button()
+                //.button()
                 .click(function() {
                     masterHandler(255, 125, 75);
                 });
             $('#rainbow-button-on')
-                .button()
+                //.button()
                 .click(function() {
-					getLightState();
+                    getLightState();
                     setColorWheel(1);
                 });
-			$('#rainbow-button-off')
-                .button()
+            $('#rainbow-button-off')
+                //.button()
                 .click(function() {
                     setColorWheel(0);
-					getLightState();
+                    getLightState();
                 });
             $('#pwr-on-button')
-                .button()
+                //.button()
                 .click(function() {
-					setPwr(1);
+                    setPwr(1);
                 });
              $('#pwr-off-button')
-                .button()
+                //.button()
                 .click(function() {
-					setPwr(0);
+                    setPwr(0);
                 });               
             getLightState();
-		});
-	</script>
+        });
+    </script>
 </body>
 </html>
