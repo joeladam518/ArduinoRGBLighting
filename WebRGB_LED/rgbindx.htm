@@ -6,50 +6,10 @@
     <title>RGB Lights</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <style type='text/css'>
-        body {
-            font-size: 16px;
-        }
-        header {
-            width: 100%;
-            margin-bottom: 30px;
-        }
-        header h1 {
-            width: 100%;
-            text-align: center;
-        }
-        .section {
-            margin: 0 auto 50px auto;
-        }
-        .section:not(.section_not) {
-            display: flex;
-            flex-flow: row nowrap;
-            justify-content: center;
-            align-items: center;
-        }
-        .section.function-buttons .col,
-        .section.transition-time .col {
-            display: flex;
-            flex-flow: row nowrap;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 50px auto;
-        }
-        .section.transition-time {
-            display: flex;
-            flex-flow: column nowrap;
-            justify-content: center;
-            align-items: center;
-        }
-        .btn-primary {
-            min-width: 125px;
-            color: #333;
-            background-color: #fff;
-            border-color: #999;
-        }
         input[type=range] {
           -webkit-appearance: none;
           width: 100%;
-          margin: 0 0 25px 0;
+          margin: 0 0 35px 0;
         }
         input[type=range]:focus {
           outline: none;
@@ -131,7 +91,6 @@
         input[type=range]:focus::-ms-fill-upper {
           background: #ffffff;
         }
-
         #red-slider::-webkit-slider-runnable-track {
             background: red;
         }
@@ -159,212 +118,341 @@
         #blue-slider::-ms-fill-upper {
             background: blue;
         }
+        body {
+            font-size: 12px;
+        }
+        header {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            width: 100%;
+            text-align: center;
+        }
         .ON {
-            -moz-box-shadow: 0 0 10px 2px #FFFF00;
-            -webkit-box-shadow: 0 0 10px 2px #FFFF00;
-            box-shadow: 0 0 10px 2px #FFFF00;
+            box-shadow: 0 0 10px 2px #FFFF00 !important;
         }
         .OFF {
-            -moz-box-shadow: 0 0 10px 2px #000000;
-            -webkit-box-shadow: 0 0 10px 2px #000000;
-            box-shadow: 0 0 10px 2px #000000;
+            box-shadow: 0 0 10px 2px #000000 !important;
+        }
+        .btn-primary {
+            color: #333;
+            background-color: #fff;
+            border-color: #999;
+        }
+        .section {
+            margin-bottom: 50px;
+        }
+        .section .row {
+            margin-bottom: 25px;
+            align-items: center;
+        }
+        .range-section {
+            margin-bottom: 30px;
+        }
+        .function-buttons .row {
+            justify-content: center;
+        }
+        .function-buttons .row button {
+            margin: 0 10px;
+            font-size: 1rem !important;
+        }
+        .set-time {
+            flex: 0 0 30.5%;
+            max-width: 30.5%;
+        }
+        #time-spinner {
+            margin-right: 10px;
         }
         footer {
             text-align: center;
             margin: 15px auto;
         }
+        @media (min-width: 576px) {
+            body {
+                font-size: 16px;
+            }
+            #time-spinner {
+                margin-right: 20px;
+            }
+
+            .function-buttons .row button {
+                margin: 0 10px;
+                font-size: 1rem !important;
+            }
+        }
+        @media (min-width: 768px) {
+            .set-time {
+                flex: 0 0 14.5%;
+                max-width: 14.5%;
+            }
+            .offset-md-3 {
+                margin-left: 24%;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <header class="row">
+        <header>
             <h1>RGB LED Lighting</h1>
         </header>
         
-        <div class="section section_not">
+        <div class="section range-section">
             <input type="range" class="slider" id="red-slider" min="0" max="255" step="1" value="0">
             <input type="range" class="slider" id="green-slider" min="0" max="255" step="1" value="0">
             <input type="range" class="slider" id="blue-slider" min="0" max="255" step="1" value="0">
         </div>
-        
+
         <div class="section">
-            <label>Transition Type:</label>
-            <select id="transition-select">
-                <option value="1">Instant</option>
-                <option value="2">Fade</option>
-            </select>
-        </div>
-        
-        <div class="section section_not function-buttons">
-            <div class="col col-md-12">
-                <button class="btn btn-primary btn-lg" id="full-on-button">Full On</button>
-                <button class="btn btn-primary btn-lg" id="white-button">White</button>
-                <button class="btn btn-primary btn-lg" id="pwr-on-button">Power On</button>
+            <div class="row">
+                <label class="col-3 offset-0 col-md-2 offset-md-3 col-form-label" for="transition-select">Color Presets:</label>
+                <select class="col-8 col-md-4 form-control" id="color-preset-select">
+                    <option disabled selected value="0"> -- select a color -- </option>
+                    <option value="1">White</option>
+                    <option value="2">Red</option>
+                    <option value="3">Green</option>
+                    <option value="4">Blue</option>
+                    <option value="5">Cyan</option>
+                    <option value="6">Magenta</option>
+                    <option value="7">Yellow</option>
+                    <option value="8">Purple</option>
+                </select>
             </div>
-            <div class="col col-md-12">
-                <button class="btn btn-primary btn-lg" id="full-off-button">Full Off</button>
-                <button class="btn btn-primary btn-lg" id="refresh-button">Refresh</button>
-                <button class="btn btn-primary btn-lg" id="pwr-off-button">Power Off</button>
-            </div>      
-        </div>
-        
-        <div class="section transition-time">
-            <label for="time-spinner">Transition Time:</label>
-            <div class="col col-md-12">
-                <input id="time-spinner" type="number" min="0" max="1000" step="5" value="0">
-                <button class="btn btn-primary" id="time-set-btn">Set Time</button>
+
+            <div class="row">
+                <label class="col-3 offset-0 col-md-2 offset-md-3 col-form-label" for="transition-select">Transition Type:</label>
+                <select class="col-8 col-md-4 form-control" id="transition-select">
+                    <option value="1">Instant</option>
+                    <option value="2">Fade</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <label class="col-3 offset-0 col-md-2 offset-md-3 col-form-label" for="time-spinner">Transition Time:</label>
+                <input class="col-4 col-md-2 form-control" id="time-spinner" type="number" min="0" max="1000" step="5" value="0">
+                <button class="btn btn-primary set-time" id="time-set-btn">Set Time</button>
             </div>
         </div>
-        
-        <div class="section">
-            <button class="btn btn-primary" id="rainbow-button-on">Color Wheel ON</button>
-            <button class="btn btn-primary" id="rainbow-button-off">Color Wheel OFF</button>
+
+        <div class="section function-buttons">
+            <div class="row">
+                <button class="btn btn-lg btn-primary col-5 col-sm-5 col-md-3" id="pwr-on-button">Power On</button>
+                <button class="btn btn-lg btn-primary col-5 col-sm-5 col-md-3" id="pwr-off-button">Power Off</button>
+            </div>
+
+            <div class="row">
+                <button class="btn btn-lg  btn-primary col-5 col-sm-5 col-md-3" id="full-on-button">Full On</button>
+                <button class="btn btn-lg  btn-primary col-5 col-sm-5 col-md-3" id="full-off-button">Full Off</button>
+            </div>
+
+            <div class="row">
+                <button class="btn btn-lg  btn-primary col-5 col-sm-5 col-md-3" id="rainbow-button-on">Color Wheel ON&nbsp;</button>
+                <button class="btn btn-lg  btn-primary col-5 col-sm-5 col-md-3" id="rainbow-button-off">Color Wheel OFF</button>
+            </div>
+        </div>
+
+        <div class="section function-buttons">
+            <div class="row">
+                <button class="btn btn-lg btn-primary col-8 col-md-4" id="refresh-button">Refresh</button>
+            </div>  
         </div>
         
         <footer>
             Copyright &copy; 2017 Joel Haker
         </footer>
     </div>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script type='text/javascript'>
         const arduino_ip_address = 'http://192.168.1.50';
         
+        const handleXMLresponse = function _handleXMLresponse(data) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, 'text/xml');
+            xmlDoc = $.parseXML(data);
+            $xml = $(xmlDoc);
+            let red = $xml.find('r').text();
+            let green = $xml.find('g').text();
+            let blue = $xml.find('b').text();
+            let transition = $xml.find('exec').text();
+            let time = $xml.find('lastTime').text();
+            let pwr = $xml.find('pwr').text();
+            let rnBwClrWhl = $xml.find('rnbw').text();
+            $('#red-slider').val(red);
+            $('#green-slider').val(green);
+            $('#blue-slider').val(blue);
+            $('#time-spinner').val(time);
+            if(transition == '2') { 
+                $('#transition-select').val('2'); 
+            } else { 
+                $('#transition-select').val('1'); 
+            }
+            if (pwr == '1') {
+                $('#pwr-off-button').removeClass('OFF');
+                $('#pwr-on-button').addClass('ON');
+            } else if (pwr == '0') {
+                $('#pwr-on-button').removeClass('ON');
+                $('#pwr-off-button').addClass('OFF');
+            }
+            if (rnBwClrWhl == '1') {
+                $('#rainbow-button-on').addClass('ON');
+                $('#rainbow-button-off').removeClass('OFF');
+            } else if (rnBwClrWhl == '0') {
+                $('#rainbow-button-on').removeClass('ON');
+                $('#rainbow-button-off').addClass('OFF');
+            }
+        }
+        const setLights = function _setLights(red, green, blue, ttransition, ttime) {
+            $.ajax({
+                method: 'POST',
+                url: arduino_ip_address + '/service', 
+                data: { r: red, g: green, b: blue, trans: ttransition, time: ttime },
+            })
+            .done(function(data) {
+                handleXMLresponse(data);
+            });
+        }
+        const updateHandler = function _updateHandler() {
+            let red = $('#red-slider').val();
+            let green = $('#green-slider').val();
+            let blue = $('#blue-slider').val();
+            let time = $('#time-spinner').val();
+            let transition = $('#transition-select').val();
+            setLights(red, green, blue, transition, time);
+        }
         const masterHandler = function _masterHandler(r, g, b) {
             $('#red-slider').val(r);
             $('#green-slider').val(g);
             $('#blue-slider').val(b);
             updateHandler();
         }
-        const setColorWheel = function _setColorWheel(rbcwval) {
-            var rbwtime = $('#time-spinner').spinner('value');
-            var rbwTimeType = $('#timeType-select').val();
-            
-            $.post((arduino_ip_address + '/clrWheel'), {rnbw: rbcwval, rtimetype: rbwTimeType, rtime: rbwtime})
+        const setColorWheel = function _setColorWheel(rval) {
+            let rtime = $('#time-spinner').val();
+            $.ajax({
+                method: 'POST',
+                url: arduino_ip_address + '/clrWheel',
+                data: { rbval: rval, rbtime: rtime }
+            })
             .done(function(data) {
                 handleXMLresponse(data);
             });
         }
         const setPwr = function _setPwr(swtch) {
-            $.post((arduino_ip_address + '/switch'), {pwr: swtch})
-            .done(function(data) {
-                handleXMLresponse(data);
-            });
-        }
-        const setLights = function _setLights(red, green, blue, transition, ttime) {
-            $.post((arduino_ip_address + '/service'), {r: red, g: green, b: blue, trans: transition, time: ttime})
+            $.ajax({
+                method: 'POST',
+                url: arduino_ip_address + '/switch',
+                data: { pwr: swtch }
+            })
             .done(function(data) {
                 handleXMLresponse(data);
             });
         }
         const getLightState = function _getLightState() {
-            $.get((arduino_ip_address + '/service'))
+            $.ajax({
+                method: 'GET',
+                url: arduino_ip_address + '/service'
+            })
             .done(function(data) {
                 handleXMLresponse(data);
             });
         }
-        const handleXMLresponse = function _handleXMLresponse(data) {
-            var parser = new DOMParser();
-            var doc = parser.parseFromString(data, 'text/xml');
-            xmlDoc = $.parseXML(data);
-            $xml = $(xmlDoc);
-            var red = $xml.find('r').text();
-            var green = $xml.find('g').text();
-            var blue = $xml.find('b').text();
-            var transition = $xml.find('exec').text();
-            var time = $xml.find('lastTime').text();
-            var pwr = $xml.find('pwr').text();
-            var rnBwClrWhl = $xml.find('rnbw').text();
-            $('#red-slider').val(red);
-            $('#green-slider').val(green);
-            $('#blue-slider').val(blue);
-            $('#time-spinner').val(time);
-            if(transition == '2') { $('#transition-select').val('2'); }
-            else { $('#transition-select').val('1'); }
-            
-            if (pwr == '1') {
-                $('#pwr-off-button').removeClass('OFF');
-                $('#pwr-on-button').addClass('ON');
-            }
-            else if (pwr == '0') {
-                $('#pwr-on-button').removeClass('ON');
-                $('#pwr-off-button').addClass('OFF');
-            }
-            
-            if (rnBwClrWhl == '1') {
-                $('#rainbow-button-off').removeClass('OFF');
-                $('#rainbow-button-on').addClass('ON');
-            }
-            else if (rnBwClrWhl == '0') {
-                $('#rainbow-button-on').removeClass('ON');
-                $('#rainbow-button-off').addClass('OFF');
+        const selectPresetColor = function _selectPresetColor(e) {
+            const $this = $(e.target);
+            let selected_color = $(e.target).val();
+            if ( selected_color != 0) {
+                switch(selected_color) {
+                    case '1':
+                        // White
+                        masterHandler(255, 216, 128);
+                        break;
+                    case '2':
+                        // Red
+                        masterHandler(255, 0, 0);
+                        break;
+                    case '3':
+                        // Green
+                        masterHandler(0, 255, 0);
+                        break;
+                    case '4':
+                        // Blue
+                        masterHandler(0, 0, 255);
+                        break;
+                    case '5':
+                        // Cyan
+                        masterHandler(0, 255, 255);
+                        break;
+                    case '6':
+                        // Magenta
+                        masterHandler(255, 0, 255);
+                        break;
+                    case '7':
+                        // Yellow
+                        masterHandler(255, 200, 0);
+                        break;
+                    case '8':
+                        // Purple
+                        masterHandler(50, 0, 175);
+                        break;
+                }
             }
         }
-        const updateHandler = function _updateHandler() {
-            var red = $('#red-slider').val();
-            var green = $('#green-slider').val();
-            var blue = $('#blue-slider').val();
-            var time = $('#time-spinner').val();
-            var transition = $('#transition-select').val();
-            setLights(red, green, blue, transition, time);
-        }
-        
+
         $(function() {
-            var tSpinnerOptions = {min: 0, max: 1000, stop: 1};
-            $('#red-slider').on('change', updateHandler);
-            $('#green-slider').on('change', updateHandler);
-            $('#blue-slider').on('change', updateHandler);
-            $('#transition-select').on('change', updateHandler);
-            $('#time-spinner').spinner();
-            $('#time-set-btn')
-                //.button()
-                .click(function() {
-                    updateHandler();
-                });
-            $('#refresh-button')
-                .button()
-                .click(function() {
-                    getLightState();
-                });
-            $('#full-on-button')
-                //.button()
-                .click(function() {
-                    masterHandler(255, 255, 255);
-                });
-            $('#full-off-button')
-                //.button()
-                .click(function() {
-                    masterHandler(0, 0, 0);
-                });
-            $('#white-button')
-                //.button()
-                .click(function() {
-                    masterHandler(255, 125, 75);
-                });
-            $('#rainbow-button-on')
-                //.button()
-                .click(function() {
-                    getLightState();
-                    setColorWheel(1);
-                });
-            $('#rainbow-button-off')
-                //.button()
-                .click(function() {
-                    setColorWheel(0);
-                    getLightState();
-                });
-            $('#pwr-on-button')
-                //.button()
-                .click(function() {
-                    setPwr(1);
-                });
-             $('#pwr-off-button')
-                //.button()
-                .click(function() {
-                    setPwr(0);
-                });               
+            $('#color-preset-select').on('change', selectPresetColor);
+            $('#red-slider').on('change', function() {
+                $('#color-preset-select').val('0');
+                updateHandler();
+            });
+            $('#green-slider').on('change', function() {
+                $('#color-preset-select').val('0');
+                updateHandler();
+            });
+            $('#blue-slider').on('change', function() {
+                $('#color-preset-select').val('0');
+                updateHandler();
+            });
+            $('#time-spinner').on('change', function() {
+                $('#color-preset-select').val('0');
+                updateHandler();
+            });
+            $('#transition-select').on('change', function() {
+                $('#color-preset-select').val('0');
+                updateHandler();
+            });
+            $('#time-set-btn').on('click', function() {
+                $('#color-preset-select').val('0');
+                updateHandler();
+            });
+            $('#refresh-button').on('click', function() {
+                $('#color-preset-select').val('0');
+                getLightState();
+            });
+            $('#full-on-button').on('click', function() {
+                $('#color-preset-select').val('0');
+                masterHandler(255, 255, 255);
+            });
+            $('#full-off-button').on('click', function() {
+                $('#color-preset-select').val('0');
+                masterHandler(0, 0, 0);
+            });
+            $('#rainbow-button-on').on('click', function() {
+                $('#color-preset-select').val('0');
+                setColorWheel(1);
+            });
+            $('#rainbow-button-off').on('click', function() {
+                $('#color-preset-select').val('0');
+                setColorWheel(0);
+            });
+            $('#pwr-on-button').on('click', function() {
+                $('#color-preset-select').val('0');
+                setPwr(1);
+            });
+             $('#pwr-off-button').on('click', function() {
+                $('#color-preset-select').val('0');
+                setPwr(0);
+            });               
             getLightState();
         });
     </script>
