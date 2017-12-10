@@ -416,7 +416,7 @@ void switchBackend(WebServer &server, WebServer::ConnectionType type, char *, bo
     }
 }
 
-// Color Wheel backend
+// Color Wheel Backend
 void rnbwBackend(WebServer &server, WebServer::ConnectionType type, char *, bool) 
 {
     char name[16];
@@ -503,7 +503,8 @@ void rnbwBackend(WebServer &server, WebServer::ConnectionType type, char *, bool
     }
 }
 
-void setup() {
+void setup() 
+{
     Serial.begin(115200);
 
     // SD card init()
@@ -547,7 +548,8 @@ void setup() {
     lightChange(FULL_WHITE, lastUsedTransition, lastUsedTime);
 }
 
-void loop() {
+void loop() 
+{
     char buff[64];
     int len = 64;
     webserver.processConnection(buff, &len);
